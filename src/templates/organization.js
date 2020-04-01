@@ -15,6 +15,7 @@ import {
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Carousel from "../components/carousel"
+import SidebarSectionList from "../components/SidebarSectionList"
 import { transformOrganization } from "../utils/airtable"
 
 function isCapital(org) {
@@ -26,6 +27,7 @@ function getLogoImage({ logo, photos, categories }) {
     categories.find(c => c.cover) || categories.find(c => c?.parent?.cover)
   return logo || photos[0] || cat?.cover || cat?.parent.cover
 }
+
 function getEditUrl({ data, org }) {
   const { capitalEditFormUrl, organizationEditFormUrl } = data.site.siteMetadata
   const url = isCapital(org) ? capitalEditFormUrl : organizationEditFormUrl
@@ -69,16 +71,18 @@ function Tags({ org }) {
     .concat(subCategories)
 
   return (
-    <ul className="my-6">
+    <SidebarSectionList title="In a snapshot">
       {org.location && <OrganizationLocation text={org.location} />}
+
       {org.headcount && (
         <OrganizationHeadcount text={`${org.headcount} employees`} />
       )}
+
       {org.orgType && <OrganizationOrgType text={org.orgType} />}
       {categoryList.map(category => (
         <OrganizationCategory key={category.name} text={category.name} />
       ))}
-    </ul>
+    </SidebarSectionList>
   )
 }
 
@@ -113,7 +117,6 @@ export default function OrganizationTemplate({ data }) {
                 <p>{org.description}</p>
               </div>
             </div>
-            <Tags org={org} />
 
             {org.fullPhotos[0] && (
               <div className="carousel my-8 bg-gray-200 rounded-lg">
@@ -134,6 +137,8 @@ export default function OrganizationTemplate({ data }) {
           </div>
           <div className="lg:w-2/5">
             <div className="flex flex-col">
+              <Tags org={org} />
+
               <a
                 href={getEditUrl({ data, org })}
                 className="w-28 self-end mr-4 px-4 py-2 leading-none border rounded text-teal-500 border-teal-500 hover:text-white hover:bg-teal-500"

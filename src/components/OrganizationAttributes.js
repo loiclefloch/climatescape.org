@@ -10,27 +10,28 @@ import {
   faHandshake,
   faMoneyCheck,
 } from "@fortawesome/free-solid-svg-icons"
+import SidebarSectionList from "./SidebarSectionList"
 import Tag from "./Tag"
 
-export const OrganizationCategory = ({ text, ...props }) => (
-  <Tag {...props}>
-    <FontAwesomeIcon icon={faBox} className="mr-1" />
-    {text}
-  </Tag>
+export const OrganizationCategory = ({ text }) => (
+  <SidebarSectionList.Item
+    text={text}
+    icon={<FontAwesomeIcon icon={faBox} />}
+  />
 )
 
-export const OrganizationLocation = ({ text, ...props }) => (
-  <Tag {...props}>
-    <FontAwesomeIcon icon={faLocationArrow} className="mr-1" />
-    {text}
-  </Tag>
+export const OrganizationLocation = ({ text }) => (
+  <SidebarSectionList.Item
+    text={text}
+    icon={<FontAwesomeIcon icon={faLocationArrow} />}
+  />
 )
 
-export const OrganizationHeadcount = ({ text, ...props }) => (
-  <Tag {...props}>
-    <FontAwesomeIcon icon={faUsers} className="mr-1" />
-    {text}
-  </Tag>
+export const OrganizationHeadcount = ({ text }) => (
+  <SidebarSectionList.Item
+    text={text}
+    icon={<FontAwesomeIcon icon={faUsers} />}
+  />
 )
 
 export const OrganizationOrgType = ({ text, ...props }) => (
